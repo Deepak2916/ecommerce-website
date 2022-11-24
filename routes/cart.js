@@ -9,8 +9,10 @@ const router = express.Router();
 
 router.get('/', cartController.getAllProducts);
 
+router.delete('/deleteall',cartController.deleteAll)
 
 router.post('/post', cartController.addProduct);
+
 
 router.get('/product/:id',cartController.getOneProduct)
 router.put('/edit/:id', cartController.editProduct);

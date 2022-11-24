@@ -16,6 +16,7 @@ const addProduct=async (req,res)=>{
 }
 const getAllProducts=async (req,res)=>{
     try{
+        
         const product=await Product.findAll()
         res.status(200).json(product)
     }
@@ -61,5 +62,13 @@ const editProduct=async (req,res)=>{
           console.log(err)
       }
 }
-
-module.exports={addProduct,getAllProducts,deleteProduct,editProduct,getOneProduct}
+const deleteAll=async (req,res)=>{
+        try{
+           await Product.destroy({where: {} })
+           res.status(200).send('all product deleted')
+        }
+        catch(err){
+            console.log(err);
+        }
+}
+module.exports={addProduct,getAllProducts,deleteProduct,editProduct,getOneProduct,deleteAll}

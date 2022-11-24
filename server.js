@@ -21,7 +21,7 @@ app.use('/cart',cartRoutes);
 app.use(errorController.get404);
 
 sequelize
-  .sync({force:true})
+  .sync()
   .then(result => {
     // console.log(result);
     app.listen(3000);

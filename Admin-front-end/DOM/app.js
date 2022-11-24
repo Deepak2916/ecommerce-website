@@ -4,10 +4,12 @@ let add_product=document.getElementById('add-product')
 let products=document.getElementById('show-products')
 let product=document.getElementById('productDiv')
 let pLink=document.getElementById('productLink')
+pLink.classList.add('active')
 let aLink=document.getElementById('addProductLink')
 add_product.addEventListener('click',addProduct)
 products.addEventListener('click',showProducts)
 pages.addEventListener('click',change)
+var pageNumbers=0
 let editId=0
 function change(e){
   
@@ -46,16 +48,23 @@ function display(id,title,url,price){
 }
 let http='http://localhost:3000/admin'
 window.addEventListener("DOMContentLoaded",()=>{
-   async function displayAll(){
-    let product= await axios.get(`${http}/products`)
-    for(let i=0;i<product.data.length;i++){
-        let title=product.data[i].title
-        let url=product.data[i].imageUrl
-        let price=product.data[i].price
-        let id=product.data[i].id
+   
+    async function displayAll(){
+    let product= await axios.get(`${http}/products?page=1&size=2`)
+    let page=product.data.products.rows
+    pageNumbers=+product.data.pages
+    console.log(pageNumbers)
+    totalPages(pageNumbers)
+    for(let i=0;i<page.length;i++){
+        let title=page[i].title
+        let url=page[i].imageUrl
+        let price=page[i].price
+        let id=page[i].id
         display(id,title,url,price)
     }
-   } 
+    document.querySelector('button.pagination').classList.add('active')
+    } 
+    
    displayAll()      
 })
 function addProduct(e){
@@ -71,7 +80,7 @@ function addProduct(e){
  }
 
 if(e.target.type=='submit'){
-    let product;
+    let product='';
     async function add(){
         if(editId!=0){
         product=await axios.put(`${http}/edit/${editId}`,obj)
@@ -123,3 +132,40 @@ function showProducts(e){
    
 
 }
+
+
+let pagination=document.getElementById('pages')
+
+
+function totalPages(total){
+    for(let i=1;i<=total;i++){
+        pagination.innerHTML+=`
+        <li><button class='btn pagination'>${i}</button></li>`
+    }
+    
+    }
+
+pagination.addEventListener('click',(e)=>{
+    
+    
+    if(e.target.classList.contains('pagination')){
+        document.querySelector('button.pagination.active').classList.remove('active')
+       async function addPage(){
+        e.target.style='display:block'
+        e.target.classList.add('active')
+        document.getElementById('productDiv').innerHTML=''
+        let number=+e.target.textContent
+        let prod= await axios.get(`${http}/products?page=${number}&size=2`)
+        let page=prod.data.products.rows
+        pageNumbers=prod.data.pages
+        for(let i=0;i<page.length;i++){
+        let title=page[i].title
+        let url=page[i].imageUrl
+        let price=page[i].price
+        let id=page[i].id
+        display(id,title,url,price)
+    }
+       }
+       addPage()
+    }
+})

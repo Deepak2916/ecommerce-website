@@ -110,3 +110,34 @@ main {
 #add-product{
   display: none;
 }
+.pagination{
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ align-items: center;
+}
+.pagination li{
+  list-style: none;
+  padding: 0.2rem;
+}
+.pagination li button{
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.4s;
+
+}
+.pagination li button:hover{
+  background-color: #a5b5b2;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+
+}
+.pagination li button.active{
+  background-color: #a5b5b2;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+}

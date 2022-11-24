@@ -16,8 +16,24 @@ const addProduct=async (req,res)=>{
 }
 const getAllProducts=async (req,res)=>{
     try{
-        const product=await Product.findAll()
-        res.status(200).json(product)
+        let pageNumber=+req.query.page
+        let sizeNumber=+req.query.size
+        let [page,size]=[1,2]
+         if(pageNumber>1){
+            page=pageNumber
+         }
+         if(sizeNumber>2){
+            size=sizeNumber
+         }
+        const product=await Product.findAndCountAll({
+            limit:size,
+            offset:(page-1)*size
+        })
+        let pages=Math.ceil(product.count/size)
+        res.status(200).json({
+            products:product,
+            pages:pages
+        })
     }
     catch(err){
         console.log(err)
