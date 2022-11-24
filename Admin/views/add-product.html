@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/forms.css">
+    <link rel="stylesheet" href="../public/css/product.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list" id="web-page">
+                <li class="main-header__item"><a id="productLink" href="#">products</a></li>
+                <li class="main-header__item"><a id="addProductLink" href="#">Add Product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main >
+        <form class="product-form" id="add-product" action="" method="POST">
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+                <label for="Url">Image url</label>
+                <input type="text" name="image" id="Url">
+                <label for="price">price</label>
+                <input type="number" name="price" id="price">
+            </div>
+
+            <button class="btn" type="submit">Add Product</button>
+        </form>
+    </main>
+
+
+    <main id="show-products" > 
+        <!-- <h1>Products</h1>
+        <p>List of all the products...</p> -->
+        <div class="grid" id="productDiv">
+            
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+    <script src="../DOM/app.js" type="module"> </script>
+</body>
+
+</html>
