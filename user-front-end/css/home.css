@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap'); */
 
 * {
     box-sizing: border-box;
@@ -267,6 +267,7 @@ section h2{
     background-color:#18acdd;
 }
 footer{
+    /* top: 80%; */
     display:flex;
     position: fixed;
     margin-top:40px;
@@ -340,7 +341,7 @@ footer .footer-icons{
     background-color: #56CCF2;
     border-radius: 5px;
     color: black;
-    padding: 2rem;
+    padding: 1rem;
     margin: 1rem;
 }
 
@@ -470,5 +471,11 @@ header ul a{
      border: none;
      width: 2rem;
      height: 2rem;
+   }
+   #orderStatus {
+    margin: 2rem;
+    margin-left: 5rem;
+   padding: 2rem;
+   color: green;
    }
    

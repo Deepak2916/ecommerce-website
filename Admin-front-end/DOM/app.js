@@ -51,7 +51,8 @@ window.addEventListener("DOMContentLoaded",()=>{
    
     async function displayAll(){
     let product= await axios.get(`${http}/products?page=1&size=2`)
-    let page=product.data.products.rows
+    let page=product.data.products
+    console.log(page)
     pageNumbers=+product.data.pages
     console.log(pageNumbers)
     totalPages(pageNumbers)
@@ -156,7 +157,7 @@ pagination.addEventListener('click',(e)=>{
         document.getElementById('productDiv').innerHTML=''
         let number=+e.target.textContent
         let prod= await axios.get(`${http}/products?page=${number}&size=2`)
-        let page=prod.data.products.rows
+        let page=prod.data.products
         pageNumbers=prod.data.pages
         for(let i=0;i<page.length;i++){
         let title=page[i].title
